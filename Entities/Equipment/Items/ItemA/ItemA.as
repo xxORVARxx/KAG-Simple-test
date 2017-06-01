@@ -5,14 +5,12 @@
 
 namespace EQ {
   class c_Item_A : EQ::b_Item {
+    // --- CONSTRUCTORS ---
+    c_Item_A() {
+      m_slots = EQ_SLOT::Slot(EQ_SLOT::HEAD | EQ_SLOT::BODY);
+    }
     // --- METHODS ---
-    void Print_test() {
-      print("---> c_Item_A");
-    }
-    EQ_SLOT::Slot Get_slot() {
-      print("Form: EQ::c_Item_A.Get_slot()");
-      return EQ_SLOT::LEFT_ARM;
-    }
+    // --- PRIVATE-METHODS ---
     // --- VARIABLES ---
   }
 }//EQ
@@ -28,9 +26,6 @@ EQ::b_Item@ Factory_function() {
 
 void onInit( CBlob@ _this ) {
   _this.Tag("ItemA");
-  EQ::Manager@ eqm = EQ::onInit( _this );
-  eqm.Register( @Factory_function, EQ_ITEM::ITEM_A, "ITEM_A" );
-
+  EQ::Manager@ eqm = EQ::onInit( _this, @Factory_function, EQ_ITEM::ITEM_A, "ITEM_A" );
   EQ::b_Item@ item = eqm.Make_item( EQ_ITEM::ITEM_A );
-  item.Print_test();
 }

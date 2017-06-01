@@ -1,4 +1,6 @@
 
+#define SERVER_ONLY
+
 #include "EQ_Functions.as"
 
 

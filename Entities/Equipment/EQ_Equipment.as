@@ -4,7 +4,7 @@
 
 
 namespace EQ {
-   EQ::Manager@ onInit( CBlob@ _this ) {
+  EQ::Manager@ onInit( CBlob@ _this, Factory_fptr@ _Foo, EQ_ITEM::Item _item, string _name  ) {
     CRules@ rules = getRules();
     if( rules == null || ! rules.hasTag("EQ")) {
       error("ERROR: Getting The Rules Failed Or The Rules Don't Have The Tag 'EQ'! -> 'EQ::onInit");
@@ -13,6 +13,8 @@ namespace EQ {
     }
     EQ::Manager@ eqm;
     rules.get( "EQM", @eqm );
+    eqm.Register( @_Foo, _item, _name );
+    // Þetta ER hluturinn sjálfur... ekki playerinn???   mad bru
     return eqm;
   }
 
