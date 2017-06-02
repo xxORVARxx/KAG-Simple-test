@@ -37,13 +37,15 @@ const string inventory_offset = "inventory offset";
 void addCommonBuilderBlocks(BuildBlock[][]@ blocks)
 {
 	CRules@ rules = getRules();
-	const bool CTF = rules.gamemode_name == "CTF";
-	const bool TTH = rules.gamemode_name == "TTH";
-	const bool SBX = rules.gamemode_name == "Sandbox";
-
+	/*
+	const bool CTF = true;// rules.gamemode_name == "CTF";
+	const bool TTH = true;// rules.gamemode_name == "TTH";
+	const bool SBX = true;// rules.gamemode_name == "Sandbox";
+	*/
+	
 	BuildBlock[] page_0;
 	blocks.push_back(page_0);
-	{
+	/*{
 		BuildBlock b(CMap::tile_castle, "stone_block", "$stone_block$", "Stone Block\nBasic building block");
 		AddRequirement(b.reqs, "blob", "mat_stone", "Stone", 10);
 		blocks[0].push_back(b);
@@ -57,7 +59,7 @@ void addCommonBuilderBlocks(BuildBlock[][]@ blocks)
 		BuildBlock b(0, "stone_door", "$stone_door$", "Stone Door\nPlace next to walls");
 		AddRequirement(b.reqs, "blob", "mat_stone", "Stone", 50);
 		blocks[0].push_back(b);
-	}
+	}*/
 	{
 		BuildBlock b(CMap::tile_wood, "wood_block", "$wood_block$", "Wood Block\nCheap block\nwatch out for fire!");
 		AddRequirement(b.reqs, "blob", "mat_wood", "Wood", 10);
@@ -68,7 +70,7 @@ void addCommonBuilderBlocks(BuildBlock[][]@ blocks)
 		AddRequirement(b.reqs, "blob", "mat_wood", "Wood", 2);
 		blocks[0].push_back(b);
 	}
-	{
+	/*{
 		BuildBlock b(0, "wooden_door", "$wooden_door$", "Wooden Door\nPlace next to walls");
 		AddRequirement(b.reqs, "blob", "mat_wood", "Wood", 30);
 		blocks[0].push_back(b);
@@ -77,13 +79,13 @@ void addCommonBuilderBlocks(BuildBlock[][]@ blocks)
 		BuildBlock b(0, "trap_block", "$trap_block$", "Trap Block\nOnly enemies can pass");
 		AddRequirement(b.reqs, "blob", "mat_stone", "Stone", 25);
 		blocks[0].push_back(b);
-	}
+	}*/
 	{
 		BuildBlock b(0, "ladder", "$ladder$", "Ladder\nAnyone can climb it");
 		AddRequirement(b.reqs, "blob", "mat_wood", "Wood", 10);
 		blocks[0].push_back(b);
 	}
-	{
+	/*{
 		BuildBlock b(0, "wooden_platform", "$wooden_platform$", "Wooden Platform\nOne way platform");
 		AddRequirement(b.reqs, "blob", "mat_wood", "Wood", 15);
 		blocks[0].push_back(b);
@@ -92,25 +94,28 @@ void addCommonBuilderBlocks(BuildBlock[][]@ blocks)
 		BuildBlock b(0, "spikes", "$spikes$", "Spikes\nPlace on Stone Block\nfor Retracting Trap");
 		AddRequirement(b.reqs, "blob", "mat_stone", "Stone", 30);
 		blocks[0].push_back(b);
-	}
+	}*/
         // My Blockes:
+	/*
         {
 	        // BuildBlock( TileType _tile, string _name, string _icon, string _desc )
 		BuildBlock b( 0, "A", "$A$", "Make A");
 		//b.temporaryBlob = false;
-		//b.buildOnGround = false;
+		b.buildOnGround = true;
+		b.size.Set( 32, 32 );
 		AddRequirement( b.reqs, "blob", "mat_stone", "Stone", 100 );
 		blocks[0].push_back( b );
 	}
-
 	if(CTF)
+	*/
 	{
 		BuildBlock b(0, "building", "$building$", "Workshop\nStand in an open space\nand tap this button.");
 		AddRequirement(b.reqs, "blob", "mat_wood", "Wood", 150);
 		b.buildOnGround = true;
 		b.size.Set(40, 24);
-		blocks[0].insertAt(9, b);
+		blocks[0].push_back(b);//.insertAt(9, b);
 	}
+	/*
 	else if(TTH)
 	{
 		{
@@ -274,4 +279,6 @@ void addCommonBuilderBlocks(BuildBlock[][]@ blocks)
 			blocks[3].push_back(b);
 		}
 	}
+*/
 }
+
