@@ -1,43 +1,8 @@
 
-#ifndef EQ_INTERFACE_AS
-#define EQ_INTERFACE_AS
+#ifndef EQ2_INTERFACE_AS
+#define EQ2_INTERFACE_AS
 
-
-
-namespace EQ_ITEM {
-  enum Item {
-    NIL = -1,
-    ITEM_A,
-    END
-  }
-}//EQ_ITEM
-
-
-
-namespace EQ_SLOT {
-  enum Slot {
-    NIL       = 0,
-    HEAD      = 1 << 0,
-    RIGHT_ARM = 1 << 1,   
-    LEFT_ARM  = 1 << 2,
-    BODY      = 1 << 3,
-    FEET      = 1 << 4,
-    END       = 1 << 5
-  }
-}//EQ_SLOT
-
-
-
-namespace EQ_CLASS {
-  enum Class {
-    NIL     = 0,
-    Knight  = 1 << 0,
-    Archer  = 1 << 1,   
-    Builder = 1 << 2,
-    Migrant = 1 << 3,
-    END     = 1 << 4
-  }
-}//EQ_CLASS
+#include "EQ1_Types.as"
 
 
 
@@ -60,7 +25,7 @@ namespace EQ {
 
 
 namespace EQ {
-  // Base Class:
+  // Base/default Class:
   class b_Item : EQ::i_Item {
     // --- CONSTRUCTORS ---
     // --- METHODS ---
@@ -94,40 +59,7 @@ namespace EQ {
     private uint m_index = -1;
     EQ_SLOT::Slot m_slots = EQ_SLOT::NIL;
     EQ_CLASS::Class m_classes = EQ_CLASS::NIL;
-  }
-}//EQ
-
-
-
-namespace EQ {
-  EQ_SLOT::Slot Get_slots_id( const string _name ) {
-    if( _name == "HEAD" )
-      return EQ_SLOT::HEAD;
-    else if( _name == "RIGHT_ARM" )
-      return EQ_SLOT::RIGHT_ARM;
-    else if( _name == "LEFT_ARM" )
-      return EQ_SLOT::LEFT_ARM;
-    else if( _name == "BODY" )
-      return EQ_SLOT::BODY;
-    else if( _name == "FEET" )
-      return EQ_SLOT::FEET;	
-    return EQ_SLOT::END;
-  }
-
-  string Get_slots_name( const EQ_SLOT::Slot _id ) {
-    switch( _id ) {
-    case EQ_SLOT::HEAD:
-      return "HEAD";
-    case EQ_SLOT::RIGHT_ARM:
-      return "RIGHT_ARM";
-    case EQ_SLOT::LEFT_ARM:
-      return "LEFT_ARM";
-    case EQ_SLOT::BODY:
-      return "BODY";
-    case EQ_SLOT::FEET:
-      return "FEET";
-    }//switch
-    return "";
+    EQ_STATE::State m_state = EQ_STATE::NIL;
   }
 }//EQ
 

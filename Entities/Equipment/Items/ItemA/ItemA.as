@@ -1,5 +1,5 @@
 
-#include "EQ_Equipment.as"
+#include "EQ_Item_Common.as"
 
 
 
@@ -10,6 +10,14 @@ namespace EQ {
       m_slots = EQ_SLOT::Slot(EQ_SLOT::HEAD | EQ_SLOT::BODY);
     }
     // --- METHODS ---
+    void onInit( CBlob@ _this ) {
+    }
+    void onTick( CBlob@ _this ) {
+    }
+    void onCollision( CBlob@ _this, CBlob@ _blob, bool _solid, Vec2f _normal, Vec2f _point1, Vec2f _point2 ) {
+    }
+    void onDie( CBlob@ _this ) {
+    }
     // --- PRIVATE-METHODS ---
     // --- VARIABLES ---
   }
@@ -24,8 +32,9 @@ EQ::b_Item@ Factory_function() {
 
 
 
-void onInit( CBlob@ _this ) {
-  _this.Tag("ItemA");
-  EQ::Manager@ eqm = EQ::onInit( _this, @Factory_function, EQ_ITEM::ITEM_A, "ITEM_A" );
-  EQ::b_Item@ item = eqm.Make_item( EQ_ITEM::ITEM_A );
+// Registering Item:
+void onCommand( CBlob@ _this, u8 _cmd, CBitStream@ _params ) {
+  if( _cmd == EQ_CMD::REGISTER ) {
+    EQ::Register_item( _this, @Factory_function, EQ_ITEM::ITEM_A );
+  }
 }

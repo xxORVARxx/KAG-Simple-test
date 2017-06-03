@@ -1,25 +1,28 @@
 
-#ifndef EQ_MANAGER_AS
-#define EQ_MANAGER_AS
+#ifndef EQ3_MANAGER_AS
+#define EQ3_MANAGER_AS
  
-#include "EQ_Interface.as"
+#include "EQ2_Interface.as"
 
 
 
 namespace EQ {
   funcdef EQ::b_Item@ Factory_fptr();
+}//EQ
 
+
+
+namespace EQ {
   class Manager {
     // --- CONSTRUCTORS ---
     // --- METHODS ---
-    void Register( Factory_fptr@ _Foo, EQ_ITEM::Item _item, string _name ) {
+    bool Register( Factory_fptr@ _Foo, EQ_ITEM::Item _item ) {
       if( m_factory[_item] != null ) {
-	error("ERROR: Registering The Item '"+ _name +"' More Than Once! -> 'EQ::Manager::Register'");
-	return;
+	error("ERROR: Registering The Item '"+ EQ_ITEM::g_str[_item] +"' More Than Once! ->'EQ_Manager.as'->'EQ::Manager::Register'");
+	return false;
       }
       m_factory[_item] = _Foo;
-      m_item_names[_item] = _name;
-      m_item_ids.set( _name, _item );
+      return true;
     }
     EQ::b_Item@ Make_item( const EQ_ITEM::Item _id ) {
       Factory_fptr@ fptr = m_factory[_id];
@@ -29,14 +32,6 @@ namespace EQ {
     }
     void Delete_item( EQ::b_Item@ _item ) {
       this.Remove_item( _item.Get_index());
-    }
-    EQ_ITEM::Item Get_id( const string _name ) {
-      int64 item = 0;
-      m_item_ids.get( _name, item );
-      return EQ_ITEM::Item(item);
-    }
-    string Get_name( const EQ_ITEM::Item _id ) {
-      return m_item_names[_id];
     }
     // --- PRIVATE-METHODS ---
     private void Insert_item( EQ::b_Item@ _item ) {
@@ -51,17 +46,14 @@ namespace EQ {
     }
     private void Remove_item( uint _i ) {
       if( _i > m_items.length() || m_items[_i] != null ) {
-	error("ERROR: Item Already Removed Or Out Of Boundary! -> 'EQ::Manager::Remove_item'");
+	error("ERROR: Item Already Removed Or Index Out Of Boundary! ->'EQ_Manager.as'->'EQ::Manager::Remove_item'");
 	return;
       }
       @m_items[_i] = null;
     }   
     // --- VARIABLES ---
     private array<EQ::Factory_fptr@> m_factory( EQ_ITEM::END, null );
-    private array<EQ::i_Item@> m_items;
-    private array<string> m_item_names( EQ_ITEM::END, "" );
-    private dictionary m_item_ids;
-  }
+    private array<EQ::i_Item@> m_items;  }
 }//EQ
 
 
