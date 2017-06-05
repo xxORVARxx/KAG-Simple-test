@@ -1,7 +1,11 @@
+/*
+ *  list this file in 'gamemode.cfg'
+ *
+ */
 
 #define SERVER_ONLY
 
-#include "EQ4_Functions.as"
+#include "EQ4_Rules_functions.as"
 
 
 
@@ -11,7 +15,9 @@ void onInit( CRules@ _this ) {
   EQ::Manager equipment_manager;
   _this.set("EQM", @equipment_manager );
   _this.AddScript("EQ_Rules_register.as");
+  // This Is Not A Good Init Functions, Becouse The 'gamemode.cfg' Havent Loaded The '.as' Files Yet. 
 }
+
 
 
 
@@ -41,7 +47,7 @@ void onCommand( CRules@ _this, u8 _cmd, CBitStream@ _params ) {
   EQ::Manager@ eqm = null;
   _this.get( "EQM", @eqm );
   if( eqm == null ) {
-    error("ERROR: Failed To Get The Equipment Manager! ->'EQ_Rules.as'->'onCommand'");
+    error("EQ ERROR: Failed To Get The Equipment Manager! ->'EQ_Rules.as'->'onCommand'");
     return;
   }
   switch( _cmd ) {
@@ -71,6 +77,9 @@ void onCommand( CRules@ _this, u8 _cmd, CBitStream@ _params ) {
     break;
   case EQ_CMD::REMOVE_FROM_WORLD:
     EQ::Remove_from_world( eqm, _this, _params );
+    break;
+  case EQ_CMD::KILL:
+    EQ::Kill( eqm, _this, _params );
     break;
   }//switch
 }

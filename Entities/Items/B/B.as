@@ -1,4 +1,6 @@
 
+#include "EQ1_Types.as"
+
 
 
 void onInit( CBlob@ _this ) {
@@ -8,6 +10,7 @@ void onInit( CBlob@ _this ) {
   _this.set("parent", @parent );
   
   _this.addCommandID("kill");
+  _this.addCommandID("EQ_ITEM");
 }
 
 
@@ -21,13 +24,20 @@ void onTick( CBlob@ _this ) {
 void GetButtonsFor( CBlob@ _this, CBlob@ _caller ) {
   if( _this.hasTag("B") && _this.isOverlapping( _caller )) {
     print("Hello From B");
-    CButton@ button = _caller.CreateGenericButton( "$B$", //<- Icon Token.
-						   Vec2f( 0.0f, -6.0f ), //<- Button Offset.
-						   _this, //<- Button Attachment.
-						   _this.getCommandID("kill"), //<- Command ID.
-						   "Kill"); //<- Description
-    if( @button != null )
-      button.enableRadius = 16.0f;
+    CButton@ button1 = _caller.CreateGenericButton( "$B$", //<- Icon Token.
+						    Vec2f( -3.0f, -6.0f ), //<- Button Offset.
+						    _this, //<- Button Attachment.
+						    _this.getCommandID("kill"), //<- Command ID.
+						    "Kill"); //<- Description
+    CButton@ button2 = _caller.CreateGenericButton( "$B$", //<- Icon Token.
+						    Vec2f( 3.0f, -6.0f ), //<- Button Offset.
+						    _this, //<- Button Attachment.
+						    _this.getCommandID("EQ_ITEM"), //<- Command ID.
+						    "Get EQ-Item!"); //<- Description
+    if( @button1 != null )
+      button1.enableRadius = 16.0f;
+    if( @button2 != null )
+      button2.enableRadius = 16.0f;
   }
 }
 
@@ -36,6 +46,18 @@ void GetButtonsFor( CBlob@ _this, CBlob@ _caller ) {
 void onCommand( CBlob@ _this_B, u8 _cmd, CBitStream@ _params ) {
   if( _cmd == _this_B.getCommandID("kill")) {
     _this_B.server_Die();
+  }
+  else if( _cmd == _this_B.getCommandID("EQ_ITEM")) {
+    CRules@ rules = getRules();
+    if( @rules == null ) {
+      error("ERROR: Getting The Rules Failed! ->'B.as'->'onCommand'");
+      return;
+    }
+    CBitStream params;
+    params.write_u16( _this_B.getNetworkID());
+    params.write_u16( EQ_ITEM::ITEM_A );
+    params.write_u16( EQ_STATE::HANDS );
+    rules.SendCommand( EQ_CMD::MAKE_NEW, params );
   }
 }
 

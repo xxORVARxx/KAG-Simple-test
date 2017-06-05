@@ -1,7 +1,26 @@
 
-#include "EQ_Item_Common.as"
+#include "EQ4_Item_functions.as"
 
 
+
+// Factory-Function:
+EQ::b_Item@ Factory_function() {
+  // Return THIS EQ-Item, But Disguised As 'EQ::b_Item' (base-class item):
+  return EQ::c_Item_A();
+}
+
+// Command To Register Item's 'Factory-Function' With The EQ-Manager:
+void onCommand( CBlob@ _this, u8 _cmd, CBitStream@ _params ) {
+  // This Call Will Come From 'EQ_Rules_register.as' When The First Player Joins The Game:
+  if( _cmd == EQ_CMD::REGISTER ) {
+    EQ::Register_item( @Factory_function, EQ_ITEM::ITEM_A );
+    _this.server_Die();
+  }
+}
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ LOGIC FOR THIS EQ-ITEM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 namespace EQ {
   class c_Item_A : EQ::b_Item {
@@ -10,31 +29,15 @@ namespace EQ {
       m_slots = EQ_SLOT::Slot(EQ_SLOT::HEAD | EQ_SLOT::BODY);
     }
     // --- METHODS ---
-    void onInit( CBlob@ _this ) {
+    void World_onInit( CBlob@ _this ) override {
+      print("----------------FROM EQ::c_Item_A::World_onInit");
     }
-    void onTick( CBlob@ _this ) {
+    void World_onTick( CBlob@ _this ) override {
+      print("----------------FROM EQ::c_Item_A::World_onTick"); 
     }
-    void onCollision( CBlob@ _this, CBlob@ _blob, bool _solid, Vec2f _normal, Vec2f _point1, Vec2f _point2 ) {
-    }
-    void onDie( CBlob@ _this ) {
-    }
+
+    
     // --- PRIVATE-METHODS ---
     // --- VARIABLES ---
   }
 }//EQ
-
-
-
-// Factory Function:
-EQ::b_Item@ Factory_function() {
-  return EQ::c_Item_A();
-}
-
-
-
-// Registering Item:
-void onCommand( CBlob@ _this, u8 _cmd, CBitStream@ _params ) {
-  if( _cmd == EQ_CMD::REGISTER ) {
-    EQ::Register_item( _this, @Factory_function, EQ_ITEM::ITEM_A );
-  }
-}

@@ -4,6 +4,7 @@
 
 
 
+// List all the EQ items here, both in the enum 'Item' and in the string 'g_str', with there right name as it is the ther .cfg files 
 namespace EQ_ITEM {
   enum Item {
     NIL = -1,
@@ -46,16 +47,18 @@ namespace EQ_CLASS {
 namespace EQ_STATE {
   enum State {
     NIL = -1,
-    CLASS,
+    EQUIPT,
     STORAGE,
     INVENTORY,
     WORLD,
+    HANDS,
     END
   }
-    const array<string> g_str = { "CLASS",
+    const array<string> g_str = { "EQUIPT",
 				  "STORAGE",
 				  "INVENTORY",
-				  "WORLD" };
+				  "WORLD",
+				  "HANDS" };
 }//EQ_STATE
 
 
@@ -73,6 +76,7 @@ namespace EQ_CMD {
     REMOVE_FROM_STORAGE,
     REMOVE_FROM_INVENTORY,
     REMOVE_FROM_WORLD,
+    KILL,
     END
   }
     const array<string> g_str = { "REGISTER",
@@ -84,7 +88,8 @@ namespace EQ_CMD {
 				  "REMOVE_FROM_EQUIP",
 				  "REMOVE_FROM_STORAGE",
 				  "REMOVE_FROM_INVENTORY",
-				  "REMOVE_FROM_WORLD" };
+				  "REMOVE_FROM_WORLD",
+				  "KILL" };
 }//EQ_CMD
 
 
