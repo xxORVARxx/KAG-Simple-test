@@ -20,7 +20,6 @@ void onInit( CRules@ _this ) {
 
 
 
-
 void onShowMenu( CRules@ _this ) {
 
 }

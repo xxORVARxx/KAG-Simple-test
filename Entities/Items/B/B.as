@@ -25,15 +25,15 @@ void GetButtonsFor( CBlob@ _this, CBlob@ _caller ) {
   if( _this.hasTag("B") && _this.isOverlapping( _caller )) {
     print("Hello From B");
     CButton@ button1 = _caller.CreateGenericButton( "$B$", //<- Icon Token.
-						    Vec2f( -3.0f, -6.0f ), //<- Button Offset.
+						    Vec2f( -5.0f, -6.0f ), //<- Button Offset.
 						    _this, //<- Button Attachment.
 						    _this.getCommandID("kill"), //<- Command ID.
 						    "Kill"); //<- Description
     CButton@ button2 = _caller.CreateGenericButton( "$B$", //<- Icon Token.
-						    Vec2f( 3.0f, -6.0f ), //<- Button Offset.
+						    Vec2f( 5.0f, -6.0f ), //<- Button Offset.
 						    _this, //<- Button Attachment.
 						    _this.getCommandID("EQ_ITEM"), //<- Command ID.
-						    "Get EQ-Item!"); //<- Description
+						    "Get Green Test EQ-Item!"); //<- Description
     if( @button1 != null )
       button1.enableRadius = 16.0f;
     if( @button2 != null )
@@ -55,8 +55,8 @@ void onCommand( CBlob@ _this_B, u8 _cmd, CBitStream@ _params ) {
     }
     CBitStream params;
     params.write_u16( _this_B.getNetworkID());
-    params.write_u16( EQ_ITEM::ITEM_A );
-    params.write_u16( EQ_STATE::HANDS );
+    params.write_u16( EQ_ITEM::TEST_GREEN );
+    params.write_u16( EQ_STATE::WORLD );
     rules.SendCommand( EQ_CMD::MAKE_NEW, params );
   }
 }

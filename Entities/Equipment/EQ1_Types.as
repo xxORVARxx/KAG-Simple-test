@@ -7,12 +7,12 @@
 // List all the EQ items here, both in the enum 'Item' and in the string 'g_str', with there right name as it is the ther .cfg files 
 namespace EQ_ITEM {
   enum Item {
-    NIL = -1,
-    ITEM_A,
+    NIL = -1, // VVVV---- HERE!
+    TEST_GREEN,
     END
   }
   // The 'g_str' Have To Match The Blob Names In The '.cfg' Files!
-    const array<string> g_str = { "ITEM_A" };
+    const array<string> g_str = { "TEST_GREEN" }; // VVVV---- HERE!
 }//EQ_ITEM
 
 
@@ -49,16 +49,12 @@ namespace EQ_STATE {
     NIL = -1,
     EQUIPT,
     STORAGE,
-    INVENTORY,
     WORLD,
-    HANDS,
     END
   }
     const array<string> g_str = { "EQUIPT",
 				  "STORAGE",
-				  "INVENTORY",
-				  "WORLD",
-				  "HANDS" };
+				  "WORLD" };
 }//EQ_STATE
 
 

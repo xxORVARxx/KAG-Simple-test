@@ -34,32 +34,26 @@ namespace EQ {
       this.Insert_item( @item );
       return item;
     }
-    bool Delete_item( EQ::b_Item@ _item ) {
-      if( @_item == null ) {
-	error("EQ ERROR: _item == null! ->'EQ_Manager.as'->'EQ::Manager::Delete_item'");
+    bool Delete_item( uint _i ) {
+      if( _i > m_items.length() || @m_items[_i] == null ) {
+	error("EQ ERROR: Index Out Of Boundary Or Item Already Removed! ->'EQ_Manager.as'->'EQ::Manager::Remove_item'");
 	return false;
       }
-      return this.Remove_item( _item.Get_index());
+      @m_items[_i] = null;
+      return true;
     }
     // --- PRIVATE-METHODS ---
     private void Insert_item( EQ::b_Item@ _item ) {
       for( uint i = 0 ; i < m_items.length() ; ++i ) {
-	if( m_items[i] == null ) {
+	if( @m_items[i] == null ) {
 	  _item.Set_index( i );
 	  @m_items[i] = @_item;
 	  return;
 	}
       }//for
+      _item.Set_index( m_items.length());
       m_items.insertLast( @_item );
-    }
-    private bool Remove_item( uint _i ) {
-      if( _i > m_items.length() || m_items[_i] != null ) {
-	error("EQ ERROR: Item Already Removed Or Index Out Of Boundary! ->'EQ_Manager.as'->'EQ::Manager::Remove_item'");
-	return false;
-      }
-      @m_items[_i] = null;
-      return true;
-    }   
+    }  
     // --- VARIABLES ---
     private array<EQ::Factory_fptr@> m_factory( EQ_ITEM::END, null );
     private array<EQ::i_Item@> m_items;  }

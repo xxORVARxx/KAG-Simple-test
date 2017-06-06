@@ -25,7 +25,7 @@ namespace EQ {
       error("EQ ERROR: Register Fail! ->'EQ4_Item_functions.as'->'EQ::Register_item'");
       return;
     }
-    print("       Success...");
+    print("    Success...");
   }
 }//EQ
 

@@ -38,13 +38,16 @@ namespace EQ {
     }    
     EQ::b_Item@ new_item = _eqm.Make_item( id );
     new_item.m_state = state;
-    if( state == EQ_STATE::INVENTORY || state == EQ_STATE::WORLD || state == EQ_STATE::HANDS ) {
-      CBlob@ item_blob = server_CreateBlob( EQ_ITEM::g_str[id] );
+    if( state == EQ_STATE::WORLD ) {
+      //CBlob@ item_blob = server_CreateBlob( EQ_ITEM::g_str[id] );
+      CBlob@ item_blob = server_CreateBlob( EQ_ITEM::g_str[id], -1, caller.getPosition());
       item_blob.Tag("EQM_CREATED");
       item_blob.set("EQ_ITEM", @new_item );
       item_blob.AddScript("EQ_Item_logic_world.as");
-      
-      caller.server_Pickup( item_blob );
+
+      //caller.server_SetQuantity( 1 );
+      //caller.server_PutInInventory( item_blob );
+       //caller.server_Pickup( item_blob );
     }
     else if( state == EQ_STATE::EQUIPT || state == EQ_STATE::STORAGE ) {
 
@@ -89,10 +92,7 @@ namespace EQ {
   }
     
   bool Kill( EQ::Manager@ _eqm, CRules@ _this, CBitStream@ _params ) {
-    
-    EQ::b_Item@ item = null;
-    
-    if( ! _eqm.Delete_item( item )) {
+    if( ! _eqm.Delete_item( _params.read_u32())) {
       error("EQ ERROR: Failed the Delete Item! ->'EQ4_Rules_functions.as'->'EQ::Kill'");
       return false;
     }
