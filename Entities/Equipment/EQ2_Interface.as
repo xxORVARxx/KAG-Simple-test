@@ -107,10 +107,10 @@ namespace EQ {
     }
     void World_onCollision( CBlob@ _this, CBlob@ _blob, bool _solid, Vec2f _normal, Vec2f _point1, Vec2f _point2 ) {
     }
-    f32 World_onHit( CBlob@ _this, Vec2f _world_point, Vec2f _velocity, const f32 _original_damage, f32 _damage, CBlob@ _hitter_blob, u8 _custom_data ) {
+    f32 World_onHit( CBlob@ _this, Vec2f _world_point, Vec2f _velocity, f32 _damage, CBlob@ _hitter_blob, u8 _custom_data ) {
       return _damage;
     }
-    void World_onHitBlob( CBlob@ _this, Vec2f _world_point, Vec2f _velocity, const f32 _original_damage, f32 _damage, CBlob@ _hitter_blob, u8 _custom_data ) {
+    void World_onHitBlob( CBlob@ _this, Vec2f _world_point, Vec2f _velocity, f32 _damage, CBlob@ _hitter_blob, u8 _custom_data ) {
     }
     void World_onHealthChange( CBlob@ _this, f32 _oldHealth ) {
     }

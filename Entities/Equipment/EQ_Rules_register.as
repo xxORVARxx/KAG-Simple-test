@@ -8,6 +8,7 @@
 
 // This will use the array 'EQ_ITEM::g_str' in 'EQ1_Types.as' to find all the items and send them a commend to register ther 'factory function' with the 'manager'.
 void onNewPlayerJoin( CRules@ _this, CPlayer@ _player ) {
+  _this.Tag("EQ_REGISTERED");
   print("EQ: Register All Items:");
   for( uint i = 0 ; i < EQ_ITEM::g_str.length() ; ++i ) {
     CBlob@ item = server_CreateBlob( EQ_ITEM::g_str[i] );

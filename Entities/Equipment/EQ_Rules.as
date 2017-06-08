@@ -14,16 +14,19 @@ void onInit( CRules@ _this ) {
   _this.Tag("EQ");
   EQ::Manager equipment_manager;
   _this.set("EQM", @equipment_manager );
-  _this.AddScript("EQ_Rules_register.as");
+  if( ! _this.hasTag("EQ_REGISTERED"))
+    _this.AddScript("EQ_Rules_register.as");
   // This Is Not A Good Init Functions, Becouse The 'gamemode.cfg' Havent Loaded The '.as' Files Yet. 
 }
 
 
 
+/*
 void onShowMenu( CRules@ _this ) {
-
+ // USEING THIS HOOK WILL BREAK MENU AND THE 'ESC' BOTTON!!!
 }
- 
+*/
+
 void onSetPlayer( CRules@ _this, CBlob@ _blob, CPlayer@ _player ) {
 
 }
@@ -39,7 +42,6 @@ void onPlayerDie( CRules@ _this, CPlayer@ _victim, CPlayer@ _attacker, u8 _custo
 void onPlayerLeave( CRules@ _this, CPlayer@ _player ) {
 
 }
-
 
 
 void onCommand( CRules@ _this, u8 _cmd, CBitStream@ _params ) {

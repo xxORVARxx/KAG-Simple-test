@@ -12,23 +12,33 @@
 
 void onInit( CSprite@ _this ) {
   _this.RemoveSpriteLayer("EQ_ITEM");
-  CSpriteLayer@ eq_item = _this.addSpriteLayer( "EQ_ITEM", "/../Mods/Simple_test/Entities/Equipment/Items/ItemA/ItemA.png", 32, 32 );
+  CSpriteLayer@ eq_item = _this.addSpriteLayer( "EQ_ITEM",
+						"Test_green.png",
+						32, 32 );
+  if( @eq_item != null ) {
+    eq_item.SetOffset( Vec2f( 0, -4 ));
+    eq_item.SetVisible( true );
+  }
 }
+
+
 
 void onTick( CSprite@ _this ) {
-  CSpriteLayer@ eq_item_layer = null;
-  @eq_item_layer = _this.getSpriteLayer("EQ_ITEM");
-  if( @eq_item_layer == null ) {
-    error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  CSpriteLayer@ eq_item = null;
+  @eq_item = _this.getSpriteLayer("EQ_ITEM");
+  if( @eq_item == null ) {
+    error("EQ ERROR: Getting The 'eq_item' CSpriteLayer Faild! ->'EQ_Item_anim_equip.as'->'onTick'");
     return;
   }
-  uint16 frame = _this.getFrame();
-  eq_item_layer.SetFrame( frame );
-    
+  eq_item.SetAnimation( _this.animation ); 
 }
 
+
+
+/*
 void onRender( CSprite@ _this ) {
 }
+*/
 
 
 
