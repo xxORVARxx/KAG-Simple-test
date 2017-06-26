@@ -3,8 +3,8 @@
  * 
  */
 
-#ifndef EQ4_FUNCTIONS_AS
-#define EQ4_FUNCTIONS_AS
+#ifndef EQ4_RULES_FUNCTIONS_AS
+#define EQ4_RULES_FUNCTIONS_AS
 
 #include "EQ3_Manager.as"
 
@@ -30,8 +30,8 @@ namespace EQ {
 namespace EQ {
   bool Make_new( EQ::Manager@ _eqm, CRules@ _this, CBitStream@ _params ) { 
     CBlob@ caller = getBlobByNetworkID( _params.read_u16());    
-    EQ_ITEM::Item id = EQ_ITEM::Item(_params.read_u16());
-    EQ_STATE::State state = EQ_STATE::State(_params.read_u16());
+    EQ_ITEM::Item id = EQ_ITEM::Item( _params.read_u16());
+    EQ_STATE::State state = EQ_STATE::State( _params.read_u16());
     if( @caller == null || id >= EQ_ITEM::END || state >= EQ_STATE::END ) {
       error("EQ ERROR: Failed To Read 'CBitStream'! ->'EQ4_Rules_functions.as'->'EQ::Make_new'");
       return false;
@@ -49,7 +49,10 @@ namespace EQ {
       //caller.server_PutInInventory( item_blob );
        //caller.server_Pickup( item_blob );
     }
-    else if( state == EQ_STATE::EQUIPT || state == EQ_STATE::STORAGE ) {
+    else if( state == EQ_STATE::EQUIPT ) {
+
+    }
+    else if( state == EQ_STATE::STORAGE ) {
 
     }
     else {
@@ -66,11 +69,11 @@ namespace EQ {
   bool Move_to_storage( EQ::Manager@ _eqm, CRules@ _this, CBitStream@ _params ) {
     return false;
   }
-  
+  /*
   bool Move_to_inventory( EQ::Manager@ _eqm, CRules@ _this, CBitStream@ _params ) {
     return false;
   }
-  
+  */
   bool Move_to_world( EQ::Manager@ _eqm, CRules@ _this, CBitStream@ _params ) {
     return false;
   }
@@ -82,11 +85,11 @@ namespace EQ {
   bool Remove_from_storage( EQ::Manager@ _eqm, CRules@ _this, CBitStream@ _params ) {
     return false;
   }
-  
+  /*
   bool Remove_from_inventory( EQ::Manager@ _eqm, CRules@ _this, CBitStream@ _params ) {
     return false;
   }
-  
+  */
   bool Remove_from_world( EQ::Manager@ _eqm, CRules@ _this, CBitStream@ _params ) {
     return false;
   }

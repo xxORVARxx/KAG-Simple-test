@@ -16,7 +16,7 @@ void onInit( CRules@ _this ) {
   _this.set("EQM", @equipment_manager );
   if( ! _this.hasTag("EQ_REGISTERED"))
     _this.AddScript("EQ_Rules_register.as");
-  // This Is Not A Good Init Functions, Becouse The 'gamemode.cfg' Havent Loaded The '.as' Files Yet. 
+  // This Is Not A Good Init Functions, Becouse The 'gamemode.cfg' Havent Loaded The '.as' Files Yet.
 }
 
 
@@ -61,9 +61,11 @@ void onCommand( CRules@ _this, u8 _cmd, CBitStream@ _params ) {
   case EQ_CMD::MOVE_TO_STORAGE:
     EQ::Move_to_storage( eqm, _this, _params );
     break;
+    /*
   case EQ_CMD::MOVE_TO_INVENTORY:
     EQ::Move_to_inventory( eqm, _this, _params );
     break;
+    */
   case EQ_CMD::MOVE_TO_WORLD:
     EQ::Move_to_world( eqm, _this, _params );
     break;
@@ -73,9 +75,11 @@ void onCommand( CRules@ _this, u8 _cmd, CBitStream@ _params ) {
   case EQ_CMD::REMOVE_FROM_STORAGE:
     EQ::Remove_from_storage( eqm, _this, _params );
     break;
+    /*
   case EQ_CMD::REMOVE_FROM_INVENTORY:
     EQ::Remove_from_inventory( eqm, _this, _params );
     break;
+    */
   case EQ_CMD::REMOVE_FROM_WORLD:
     EQ::Remove_from_world( eqm, _this, _params );
     break;

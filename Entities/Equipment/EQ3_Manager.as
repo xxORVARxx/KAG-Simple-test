@@ -56,7 +56,8 @@ namespace EQ {
     }  
     // --- VARIABLES ---
     private array<EQ::Factory_fptr@> m_factory( EQ_ITEM::END, null );
-    private array<EQ::i_Item@> m_items;  }
+    private array<EQ::i_Item@> m_items;
+  }
 }//EQ
 
 

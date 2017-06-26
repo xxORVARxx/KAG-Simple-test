@@ -1,6 +1,6 @@
 
-#ifndef EQ_ITEM_COMMON_AS
-#define EQ_ITEM_COMMON_AS
+#ifndef EQ4_ITEM_FUNCTIONS_AS
+#define EQ4_ITEM_FUNCTIONS_AS
 
 #include "EQ3_Manager.as"
 
@@ -25,12 +25,13 @@ namespace EQ {
       error("EQ ERROR: Register Fail! ->'EQ4_Item_functions.as'->'EQ::Register_item'");
       return;
     }
+    AddIconToken("$EQ_"+ EQ_ITEM::g_str[ _item ] +"$", EQ_ITEM::g_str[ _item ] +".png", Vec2f( 16, 16 ), 3 );
     print("    Success...");
   }
 }//EQ
 
 
-
+/*
 namespace EQ {
   bool Getter( CBlob@ _this, CRules@ _rules, array<EQ::b_Item@>@ _items ) {
     @_rules = getRules();
@@ -42,13 +43,7 @@ namespace EQ {
     if( @_items == null )
       return false;
     // ^^^^^^^^^^^^^^^^^^^^^^
-    /* // Items Dont Have "EQ_ITEMS" Yet!!!!!!!!!!!!!
-    _this.get("EQ_ITEMS", _items );
-    if( @_items == null ) {
-      error("EQ ERROR: Failed To Get The Items! ->'EQ4_Item_functions.as'->'EQ::Getter'");
-      return false;
-    }
-    */
+
     return true;
   }
 
@@ -63,7 +58,7 @@ namespace EQ {
 
   
 }//EQ
-
+*/
 
 
 #endif
