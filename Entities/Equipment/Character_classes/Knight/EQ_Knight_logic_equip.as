@@ -47,16 +47,17 @@ void onCreateInventoryMenu( CBlob@ _this, CBlob@ _for_blob, CGridMenu@ _gridmenu
   EQ::c_Equipment_systems@ eqs = null;
   _this.get("EQS", @eqs );
   if( @eqs == null ) {
-    error("EQ ERROR: Failed To Get The 'Equipment-Systems'! ->'onCreateInventoryMenu'->'"+ getCurrentScriptName() +"'");
+    error("EQ ERROR: Failed To Get The 'Equipment-Systems'! ->'"+ getCurrentScriptName() +"'->'onCreateInventoryMenu'");
     return;
   }
   eqs.Show_equipment_menu( _gridmenu );
+  eqs.Show_storage_menu( _gridmenu );
 }
 
 
 
 void onCollision( CBlob@ _this, CBlob@ _blob, bool _solid ) {
-  if( @blob == null || blob.getShape().vellen > 1.0f )
+  if( @_blob == null || _blob.getShape().vellen > 1.0f )
     return;
 
 }
@@ -67,7 +68,7 @@ void onCommand( CBlob@ _this, u8 _cmd, CBitStream@ _params ) {
   EQ::c_Equipment_systems@ eqs = null;
   _this.get("EQS", @eqs );
   if( @eqs == null ) {
-    error("EQ ERROR: Failed To Get The 'Equipment-Systems'! ->'onCommand'->'"+ getCurrentScriptName() +"'");
+    error("EQ ERROR: Failed To Get The 'Equipment-Systems'! ->'"+ getCurrentScriptName() +"'->'onCommand'");
     return;
   }
   eqs.Command( _cmd, _params );

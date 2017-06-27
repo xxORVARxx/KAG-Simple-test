@@ -12,9 +12,9 @@ namespace EQ {
     // --- CONSTRUCTORS ---
     // --- METHODS ---
     EQ_ITEM::Item Get_type();
-    void Set_type( const EQ_ITEM::Item _item ); // Only For Manager.
+    void Set_type( const EQ_ITEM::Item _item ); // <-- Only For Manager.
     uint Get_index();
-    void Set_index( const uint _i ); // Only For Manager.
+    void Set_index( const uint _i ); // <-- Only For Manager.
     EQ_SLOT::Slot Get_slots();
     EQ_CLASS::Class Get_classes();
     EQ_STATE::State Get_state();

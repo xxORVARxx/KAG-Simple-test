@@ -54,10 +54,11 @@ void onCommand( CBlob@ _this_B, u8 _cmd, CBitStream@ _params ) {
       return;
     }
     CBitStream params;
-    params.write_u16( _this_B.getNetworkID());
+    //params.write_u16( _this_B.getNetworkID());
+    //params.write_u16( EQ_STATE::WORLD );
     params.write_u16( EQ_ITEM::TEST_GREEN );
-    params.write_u16( EQ_STATE::WORLD );
-    rules.SendCommand( EQ_CMD::MAKE_NEW, params );
+    params.write_Vec2f( _this_B.getPosition());
+    rules.SendCommand( EQ_CMD::MAKE_NEW_IN_WORLD, params );  
   }
 }
 

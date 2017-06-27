@@ -7,8 +7,8 @@
 
 
 namespace EQ {
-  void Register_item( EQ::Factory_fptr@ _Foo, EQ_ITEM::Item _item ) {
-    print("EQ: Registereing Item: '"+ EQ_ITEM::g_str[_item] +"'...");
+  void Register_item( EQ::Factory_fptr@ _Foo, EQ_ITEM::Item _item_type ) {
+    print("EQ: Registereing Item: '"+ EQ_ITEM::g_str[ _item_type ] +"'...");
     EQ::Manager@ eqm = null;
     CRules@ rules = getRules();
     if( @rules == null || ! rules.hasTag("EQ")) {
@@ -21,11 +21,11 @@ namespace EQ {
       error("EQ ERROR: Failed To Get The Equipment Manager! ->'EQ4_Item_functions.as'->'EQ::Register_item'");
       return;
     }
-    if( ! eqm.Register( @_Foo, _item )) {
+    if( ! eqm.Register( @_Foo, _item_type )) {
       error("EQ ERROR: Register Fail! ->'EQ4_Item_functions.as'->'EQ::Register_item'");
       return;
     }
-    AddIconToken("$EQ_"+ EQ_ITEM::g_str[ _item ] +"$", EQ_ITEM::g_str[ _item ] +".png", Vec2f( 16, 16 ), 3 );
+    AddIconToken("$EQ_"+ EQ_ITEM::g_str[ _item_type ] +"$", EQ_ITEM::g_str[ _item_type ] +".png", Vec2f( 16, 16 ), 3 );
     print("    Success...");
   }
 }//EQ

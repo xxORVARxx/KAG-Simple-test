@@ -48,41 +48,40 @@ void onCommand( CRules@ _this, u8 _cmd, CBitStream@ _params ) {
   EQ::Manager@ eqm = null;
   _this.get( "EQM", @eqm );
   if( eqm == null ) {
-    error("EQ ERROR: Failed To Get The Equipment Manager! ->'EQ_Rules.as'->'onCommand'");
+    error("EQ ERROR: Failed To Get The Equipment Manager! ->'"+ getCurrentScriptName() +"'->'onCommand'");
     return;
   }
-  switch( _cmd ) {
-  case EQ_CMD::MAKE_NEW:
-    EQ::Make_new( eqm, _this, _params );
+  switch( _cmd ) {  
+  case EQ_CMD::MAKE_NEW_IN_EQUIP:
+    EQ::Make_new_in_equip( eqm, _this, _params );
     break;
+  case EQ_CMD::MAKE_NEW_IN_STORAGE:
+    EQ::Make_new_in_storage( eqm, _this, _params );
+    break;
+  case EQ_CMD::MAKE_NEW_IN_WORLD:
+    EQ::Make_new_in_world( eqm, _this, _params );
+    break;
+   
   case EQ_CMD::MOVE_TO_EQUIP:
     EQ::Move_to_equip( eqm, _this, _params );
     break;
   case EQ_CMD::MOVE_TO_STORAGE:
     EQ::Move_to_storage( eqm, _this, _params );
     break;
-    /*
-  case EQ_CMD::MOVE_TO_INVENTORY:
-    EQ::Move_to_inventory( eqm, _this, _params );
-    break;
-    */
   case EQ_CMD::MOVE_TO_WORLD:
     EQ::Move_to_world( eqm, _this, _params );
     break;
+    
   case EQ_CMD::REMOVE_FROM_EQUIP:
     EQ::Remove_from_equip( eqm, _this, _params );
     break;
   case EQ_CMD::REMOVE_FROM_STORAGE:
     EQ::Remove_from_storage( eqm, _this, _params );
     break;
-    /*
-  case EQ_CMD::REMOVE_FROM_INVENTORY:
-    EQ::Remove_from_inventory( eqm, _this, _params );
-    break;
-    */
   case EQ_CMD::REMOVE_FROM_WORLD:
     EQ::Remove_from_world( eqm, _this, _params );
     break;
+    
   case EQ_CMD::KILL:
     EQ::Kill( eqm, _this, _params );
     break;

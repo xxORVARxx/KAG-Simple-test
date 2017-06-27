@@ -52,22 +52,24 @@ void onHealthChange( CBlob@ _this, f32 _oldHealth ) {
 }
  
 void onDie( CBlob@ _this ) {
-  if( _this.hasTag("EQM_CREATED")) {
+  if( _this.hasTag("EQ")) {
     CRules@ rules = getRules();
     if( @rules == null ) {
-      error("EQ ERROR: Getting The Rules Failed! ->'EQ4_Item_logic_world.as'->'onDie'");
+      error("EQ ERROR: Getting The Rules Failed! ->'"+ getCurrentScriptName() +"'->'onDie'");
       return;
     }
     EQ::b_Item@ item = null;
     _this.get("EQ_ITEM", @item );
     if( @item == null ) {
-      error("EQ ERROR: Getting The EQ-Item Failed! ->'EQ_Item_logic_world.as'->'onDie'");
+      error("EQ ERROR: Getting The EQ-Item Failed! ->'"+ getCurrentScriptName() +"'->'onDie'");
       return;
     }
-    item.World_onDie( _this, rules );
-    CBitStream params;
-    params.write_u32( item.Get_index());
-    rules.SendCommand( EQ_CMD::KILL, params );
+    if( item.Get_state() == EQ_STATE::WORLD ) {
+      item.World_onDie( _this, rules );
+      CBitStream params;
+      params.write_u32( item.Get_index());
+      rules.SendCommand( EQ_CMD::KILL, params );
+    }
   }
 }
 

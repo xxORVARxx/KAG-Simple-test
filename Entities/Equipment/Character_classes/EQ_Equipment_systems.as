@@ -50,10 +50,10 @@ namespace EQ {
     }
     // --- METHODS ---
     void Set_size( uint _width, uint _height ) {
-      m_menu_size.x = _width;
-      m_menu_size.y = _height;
-      m_menu_pos.x = 48.0f * ( m_menu_size.x > 4 ? m_menu_size.x / 2.0f : 2.0f ) + 4.0f;
-      m_menu_pos.y = 48.0f * ( m_menu_size.y / 2.0f );
+      m_equipment_menu_size.x = _width;
+      m_equipment_menu_size.y = _height;
+      m_equipment_menu_pos.x = 48.0f * ( m_equipment_menu_size.x > 4 ? m_equipment_menu_size.x / 2.0f : 2.0f ) + 4.0f;
+      m_equipment_menu_pos.y = 48.0f * ( m_equipment_menu_size.y / 2.0f );
     }
     void Add_slot( EQ_SLOT::Slot _slot ) {
       m_slots.insertLast( EQ::c_Slot( m_slots.length(), _slot ));
@@ -85,14 +85,15 @@ namespace EQ {
     }
     // --- PRIVATE-METHODS ---
     private void Equipment_menu( CGridMenu@ _gridmenu ) {
-      if(( m_slots.length() == 0 )||( m_slots.length() != ( m_menu_size.x * m_menu_size.y ))) {
-	error("m_slots.length() == 0");
+      if(( m_slots.length() == 0 )||( m_slots.length() != ( m_equipment_menu_size.x * m_equipment_menu_size.y ))) {
+	error("EQ ERROR: The Menu Size Must Equal The Number Of Slots! ->'"+ getCurrentScriptName() +"'->'EQ::c_Equipment_systems::Equipment_menu'");
 	return;
       }
-      Vec2f pos( _gridmenu.getUpperLeftPosition().x - m_menu_pos.x, _gridmenu.getUpperLeftPosition().y + m_menu_pos.y );
-      CGridMenu@ menu = CreateGridMenu( pos, m_the_blob, m_menu_size, "Equipped Items" );
+      Vec2f pos( _gridmenu.getUpperLeftPosition().x - m_equipment_menu_pos.x,
+		 _gridmenu.getUpperLeftPosition().y + m_equipment_menu_pos.y );
+      CGridMenu@ menu = CreateGridMenu( pos, m_the_blob, m_equipment_menu_size, "Equipped Items" );
       if( @menu == null ) {
-	error("EQ ERROR: Failed To Create Grid Menu! ->'EQ::c_Equipment_systems::Show_menu'->'"+ getCurrentScriptName() +"'");
+	error("EQ ERROR: Failed To Create Grid Menu! ->'"+ getCurrentScriptName() +"'->'EQ::c_Equipment_systems::Equipment_menu'");
 	return;
       }
       menu.deleteAfterClick = false;
@@ -127,7 +128,10 @@ namespace EQ {
       }//for
     }
     private void Storage_menu( CGridMenu@ _gridmenu ) {
-      
+      Vec2f menu_size( 6, 6 );
+      Vec2f pos( _gridmenu.getLowerRightPosition().x + ( 48.0f * ( menu_size.x / 2.0f )) + 4.0f,
+		 _gridmenu.getUpperLeftPosition().y + ( 48.0f * ( menu_size.y / 2.0f )));
+      CGridMenu@ menu = CreateGridMenu( pos, m_the_blob, menu_size, "Storage" );
     }
     // --- VARIABLES ---
     CBlob@ m_the_blob;
@@ -135,8 +139,8 @@ namespace EQ {
     private array<EQ::i_Item@> m_items_equipt;
     private array<EQ::c_Slot> m_slots;
     private EQ_CLASS::Class m_class;
-    private Vec2f m_menu_size;
-    private Vec2f m_menu_pos;
+    private Vec2f m_equipment_menu_size;
+    private Vec2f m_equipment_menu_pos;
   }
 }//EQ
 

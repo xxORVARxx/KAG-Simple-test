@@ -20,7 +20,7 @@ namespace EQ {
     // Get The EQ-Item's Overlayer:
     CSpriteLayer@ sprite_layer = _this.getSpriteLayer("EQ_ITEM");// <--- !!!!!!!!!
     if( @sprite_layer == null ) {
-      error("EQ ERROR: Getting The 'eq_item' CSpriteLayer Faild! ->'EQ_Item_anim_equip.as'->'Play_items_animation'");
+      error("EQ ERROR: Getting The 'eq_item' CSpriteLayer Faild! ->'"+ getCurrentScriptName() +"'->'EQ::Play_items_animation'");
       return;
     }    
     // Check If The Overlayer Has The Animation That The Class Is Playing:
@@ -46,7 +46,7 @@ namespace EQ {
     // Get The EQ-Item's Overlayer:
     CSpriteLayer@ sprite_layer = _this.getSpriteLayer("EQ_ITEM");// <--- !!!!!!!!!
     if( @sprite_layer == null ) {
-      error("EQ ERROR: Getting The 'eq_item' CSpriteLayer Faild! ->'EQ_Item_anim_equip.as'->'Play_items_animation'");
+      error("EQ ERROR: Getting The 'eq_item' CSpriteLayer Faild! ->'"+ getCurrentScriptName() +"'->'EQ::Set_fixed_frames'");
       return;
     }    
     CBlob@ blob = _this.getBlob();
@@ -68,7 +68,7 @@ namespace EQ {
     }
     KnightInfo@ knight;
     if( !blob.get("knightInfo", @knight )) {
-      error("EQ ERROR: Getting The 'knightInfo' Faild! ->'EQ_Item_anim_equip.as'->'Play_items_animation'");
+      error("EQ ERROR: Getting The 'knightInfo' Faild! ->'"+ getCurrentScriptName() +"'->'EQ::Set_fixed_frames'");
       return;
     }
     bool walking = ( blob.isKeyPressed( key_left ) || blob.isKeyPressed( key_right ));
@@ -116,7 +116,7 @@ namespace EQ {
       Vec2f vel = blob.getVelocity();
       RunnerMoveVars@ moveVars;
       if( !blob.get("moveVars", @moveVars )) {
-	error("EQ ERROR: Getting The 'moveVars' Faild! ->'EQ_Item_anim_equip.as'->'Play_items_animation'");
+	error("EQ ERROR: Getting The 'moveVars' Faild! ->'"+ getCurrentScriptName() +"'->'EQ::Set_fixed_frames'");
 	return;
       }
       if( ! (( vel.y < -0.0f )&& moveVars.walljumped )) {
