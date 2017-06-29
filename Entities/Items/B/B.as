@@ -4,6 +4,7 @@
 
 
 void onInit( CBlob@ _this ) {
+  print("Here Is B");
   _this.Tag("B");
    
   CBlob@ parent = null;

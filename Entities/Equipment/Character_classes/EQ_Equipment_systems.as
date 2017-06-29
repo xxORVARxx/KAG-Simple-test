@@ -60,14 +60,20 @@ namespace EQ {
       m_items_equipt.insertLast( null );
     }
     void Show_equipment_menu( CGridMenu@ _gridmenu ) {
+      /*
       CBitStream params;
       params.write_string( _gridmenu.getName());
       m_the_blob.SendCommand( m_the_blob.getCommandID("EQM_EQUIPMENT_MENU"), params );
+      */
+      this.Equipment_menu( _gridmenu );
     }
     void Show_storage_menu( CGridMenu@ _gridmenu ) {
+      /*
       CBitStream params;
       params.write_string( _gridmenu.getName());
       m_the_blob.SendCommand( m_the_blob.getCommandID("EQM_STORAGE_MENU"), params );
+      */
+      this.Storage_menu( _gridmenu );
     }
     void Command( u8 _cmd, CBitStream@ _params ) {
       if( _cmd == m_the_blob.getCommandID("EQM_EQUIPMENT_MENU")) {
@@ -80,7 +86,7 @@ namespace EQ {
       }
       else if( _cmd == m_the_blob.getCommandID("EQM_SLOT_SELECTED")) {
 	u8 i = _params.read_u8();
-	printInt("-------hello: ", i );
+	printInt("Command: 'EQM_SLOT_SELECTED'   ------------------------ index: ", i );
       }
     }
     // --- PRIVATE-METHODS ---
