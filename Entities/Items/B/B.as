@@ -45,21 +45,22 @@ void GetButtonsFor( CBlob@ _this, CBlob@ _caller ) {
 
 
 void onCommand( CBlob@ _this_B, u8 _cmd, CBitStream@ _params ) {
-  if( _cmd == _this_B.getCommandID("kill")) {
-    _this_B.server_Die();
-  }
-  else if( _cmd == _this_B.getCommandID("EQ_ITEM")) {
-    CRules@ rules = getRules();
-    if( @rules == null ) {
-      error("ERROR: Getting The Rules Failed! ->'B.as'->'onCommand'");
-      return;
+if( getNet().isServer()) {
+//if( getNet().isClient()) {
+    if( _cmd == _this_B.getCommandID("kill")) {
+      _this_B.server_Die();
     }
-    CBitStream params;
-    //params.write_u16( _this_B.getNetworkID());
-    //params.write_u16( EQ_STATE::WORLD );
-    params.write_u16( EQ_ITEM::TEST_GREEN );
-    params.write_Vec2f( _this_B.getPosition());
-    rules.SendCommand( EQ_CMD::MAKE_NEW_IN_WORLD, params );  
+    else if( _cmd == _this_B.getCommandID("EQ_ITEM")) {
+      CRules@ rules = getRules();
+      if( @rules == null ) {
+	error("ERROR: Getting The Rules Failed! ->'B.as'->'onCommand'");
+	return;
+      }
+      CBitStream params;
+      params.write_u16( EQ_ITEM::TEST_GREEN );
+      params.write_Vec2f( _this_B.getPosition());
+      rules.SendCommand( EQ_CMD::MAKE_NEW_IN_WORLD, params );  
+    }
   }
 }
 

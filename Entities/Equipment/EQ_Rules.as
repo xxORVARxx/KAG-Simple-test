@@ -56,6 +56,7 @@ void onNewPlayerJoin( CRules@ _this, CPlayer@ _player ) {
 
 
 
+/*
 void onRespawn( CRules@ _this, CRespawnQueueActor@ _queue, CPlayer@ _player, CBlob@ _blob ) {
  //Make 'B's for Players:
   Vec2f vel = getRandomVelocity( 90.0f, 2.0f, 120.0f );
@@ -69,7 +70,7 @@ void onSetPlayer( CRules@ _this, CBlob@ _blob, CPlayer@ _player ) {
   printVec2f("Player pos: ", _blob.getPosition());
 }
 
-/*
+
 void onShowMenu( CRules@ _this ) {
  // USEING THIS HOOK WILL BREAK MENU AND THE 'ESC' BOTTON!!!
 }

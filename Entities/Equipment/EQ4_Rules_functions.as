@@ -78,11 +78,11 @@ namespace EQ {
     Vec2f pos = _params.read_Vec2f();
     EQ::b_Item@ new_item = _eqm.Make_item( type );
     new_item.m_state = EQ_STATE::NIL;
-    _params.Clear();
-    _params.write_u32( new_item.Get_index());
-    _params.write_Vec2f( pos );
-    _params.ResetBitIndex();
-    return Move_to_world( _eqm, _this, _params );
+    CBitStream params;
+    params.write_u32( new_item.Get_index());
+    params.write_Vec2f( pos );
+    params.ResetBitIndex();
+    return Move_to_world( _eqm, _this, params );
   }
 
   // CBitStream: 
@@ -110,7 +110,7 @@ namespace EQ {
     item.m_state = EQ_STATE::WORLD;
     item_blob.Tag("EQ");
     item_blob.set("EQ_ITEM", @item );
-    item_blob.AddScript("EQ_Item_logic_world.as");
+    item.World_onInit( item_blob );
     return true;
   }
   
